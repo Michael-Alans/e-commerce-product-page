@@ -1,0 +1,193 @@
+:root {
+--Orange: hsl(26, 100%, 55%);
+--Pale-orange: hsl(25, 100%, 94%);
+--Very-dark-blue: hsl(220, 13%, 13%);
+--Dark-grayish-blue: hsl(219, 9%, 45%);
+--Grayish-blue: hsl(220, 14%, 75%);
+--Light-grayish-blue: hsl(223, 64%, 98%);
+--White: hsl(0, 0%, 100%);
+--Black--with-75percent-opacity-for-lightbox-background: hsl(0, 0%, 0%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Kumbh Sans", sans-serif;
+}
+
+
+*{
+  box-sizing: border-box;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  background-color: var(--White);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid var(--Light-grayish-blue);
+} 
+
+.logo-nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 30px;
+  padding-bottom: 2rem;
+}
+
+.profilePics-cart-container {
+  padding-bottom: 2rem;
+}
+
+.profilePics-cart-container, nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+nav li {
+  list-style: none;
+  margin-right: 15px;
+  padding-bottom: 2rem;
+}
+
+nav li:hover {
+  cursor: pointer;
+  border-bottom: 4px solid var(--Orange);
+}
+
+.profilePics {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+  border: 3px solid var(--Orange);
+}
+
+.profilePics-cart-container:hover {
+  cursor: pointer;
+}
+
+.cartIcon {
+  margin-right: 20px;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding-bottom: 2.5rem;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    z-index: 1000; /* Ensure it stays above other elements */
+  }
+
+  .logo {
+    margin-left: 10px; /* Add space between menu button and logo */
+    padding-bottom: 2rem;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    background-color: var(--White);
+    position: fixed; /* Changed from absolute to fixed */
+    top: 0;
+    left: 0;
+    width: 70%; /* Adjust width as needed */
+    height: 100vh;
+    padding: 6rem 2rem 2rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transition: transform 0.3s ease; /* Add smooth transition */
+    transform: translateX(-100%); /* Start off-screen */
+  }
+
+  nav.active {
+    display: flex;
+    transform: translateX(0); /* Slide in */
+  }
+
+  nav li {
+    padding: 1rem 0;
+    margin: 0;
+    border-bottom: 1px solid var(--Light-grayish-blue);
+    width: 100%;
+  }
+
+  nav li:hover {
+    border-bottom: 1px solid var(--Orange);
+  }
+
+}
+
+/*image gallery*/
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(300px, auto);
+  gap: 5rem;
+  padding-top: 5rem;
+}
+
+
+.large-image img, .thumbnails img {
+  border-radius: 20px;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(100px, auto);
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.thumbnails img:hover {
+  cursor: pointer;
+}
+
+.product-details {
+  padding: 3rem 0 3rem;
+}
+
+#sneaker-company {
+  color: var(--Dark-grayish-blue);
+  font-weight: 700;
+}
+
+.product-details h1 {
+  font-size: 2rem;
+}
+
+/*complete the styling of the product details*/
+
+@media (max-width:768px) {
+  .image-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+
