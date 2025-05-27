@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import prev from "/images/icon-previous.svg"
 import next from "/images/icon-next.svg"
 import plus from "/images/icon-plus.svg"
@@ -6,7 +6,7 @@ import minus from "/images/icon-minus.svg"
 import cart from "/images/icon-cart.svg"
 
 
-export default function ProductGallery() {
+export default function ProductGallery({count, setCount}) {
 
      
     const productImages = [
@@ -45,7 +45,19 @@ export default function ProductGallery() {
   };
 
   const isMobile = window.matchMedia("(max-width:768px)").matches;
-    
+  
+  
+
+  
+    const increment = ()=> {
+      setCount (prevCount => prevCount + 1)
+    }
+  
+    const decrement = ()=> {
+      setCount(prevCount => prevCount > 0 ?  - 1 : 0)
+
+    }
+  
 
     return(
         <main className="image-gallery">
@@ -86,9 +98,9 @@ export default function ProductGallery() {
 
            <div className="cart-controls">
             <div className="quantity-selector">
-             <button id="decrease"><img src={minus} alt="" /></button>
-            <span id="quantity">12</span>
-           <button id="increase"><img src={plus} alt="" /></button>
+             <button id="decrease" onClick={decrement}><img src={minus} alt="" /></button>
+            <span id="quantity">{count}</span>
+           <button id="increase" onClick={increment}><img src={plus} alt="" /></button>
            </div>
             <button id="add-to-cart">
              <img src={cart} alt="Cart Icon" />
