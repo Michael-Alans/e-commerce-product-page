@@ -5,7 +5,7 @@ import profilePics from "/images/image-avatar.png";
 import menu from "/images/icon-menu.svg";
 import close from "/images/icon-close.svg";
 
-export default function Header({count}) {
+export default function Header({count, toggleCart}) {
   const [menuOpen, setMenuopen] = useState(false);
 
   function toggleMenu() {
@@ -40,8 +40,8 @@ export default function Header({count}) {
 
       <div className="profilePics-cart-container">
        <div className="cart-container">
-       <img src={cartIcon} alt="cart" className="cartIcon" />
-       {count > 0 && <span className="cart-badge">{count}</span>}
+       <img src={cartIcon} alt="cart" className="cartIcon"  onClick={toggleCart}/>
+       {<span className="cart-badge">{count}</span>}
        </div>
         <img src={profilePics} alt="profile" className="profilePics" />
       </div>

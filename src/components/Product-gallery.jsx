@@ -4,9 +4,10 @@ import next from "/images/icon-next.svg"
 import plus from "/images/icon-plus.svg"
 import minus from "/images/icon-minus.svg"
 import cart from "/images/icon-cart.svg"
+import deleteIcon from "/images/icon-delete.svg"
 
 
-export default function ProductGallery({count, setCount}) {
+export default function ProductGallery({count, setCount, cartItem, handleAddToCart, showCart}) {
 
      
     const productImages = [
@@ -47,6 +48,15 @@ export default function ProductGallery({count, setCount}) {
   const isMobile = window.matchMedia("(max-width:768px)").matches;
   
   
+  const [currentProduct, setCurrentProduct] = useState({
+    id: 1,
+    title: "Fall Limited Edition Sneakers",
+    price: "$125",
+    discount: "50%",
+    originalPrice: "$250",
+    image: productImages[0].thumb
+  });
+  
 
   
     const increment = ()=> {
@@ -54,14 +64,44 @@ export default function ProductGallery({count, setCount}) {
     }
   
     const decrement = ()=> {
-      setCount(prevCount => prevCount > 0 ?  - 1 : 0)
+      setCount(prevCount => prevCount > 0 ? prevCount - 1 : 0)
 
     }
   
+    
+
+    
 
     return(
+
+        <>
+
+          <div className="cart-container">
+          { cartItem && showCart? (
+          <div>
+            <div className="cart-section">
+             <header><h3>Cart</h3></header>
+             <div className="added-items">
+              <div>
+                <img src={currentProduct.image}/>
+              </div>
+
+              <div className="item-details">
+                <h3>{currentProduct.title}</h3>
+                <p>${cartItem.price} x {cartItem.quantity} = <strong>${cartItem.price * cartItem.quantity}</strong></p>
+              </div>
+              <img src={deleteIcon} alt="" style={{height:"15px", width:"15px"}} />
+            </div>
+
+            <button id="check-out" className="add-to-cart" /* Note that the name "add-to-cart has nothing to do with the functinality of the button, it is just having same classnmae with the add-to-cart button" */>
+              Check out
+            </button>
+
+          </div>
+          </div>): null}
+          </div>
+
         <main className="image-gallery">
-            
            <section>
               <div className="large-image" >
                 <img src={isMobile? selectedImageMobile: selectedImage} alt="" id="selected-image"/>
@@ -83,17 +123,17 @@ export default function ProductGallery({count, setCount}) {
 
           <div className="product-details">
             <p id="sneaker-company">SNEAKER COMPANY</p>
-              <h1>Fall Limited Edition Sneakers</h1>
+              <h1>{currentProduct.title}</h1>
                 <p id="These-low-profile">These low-profile sneakers are your perfect casual wear companion. Featuring a 
                     durable rubber outer sole, they’ll withstand everything the weather can offer.
                 </p>
 
             <div className="price-container">
              <div style={{display: "flex", alignItems: "center"}}>
-               <span className="current-price">$125.00</span>
-              <span className="discount-badge">50%</span>
+               <span className="current-price">{currentProduct.price}</span>
+              <span className="discount-badge">{currentProduct.discount}</span>
              </div>
-             <span className="original-price">$250.00</span>
+             <span className="original-price">{currentProduct.originalPrice}</span>
            </div>
 
            <div className="cart-controls">
@@ -102,7 +142,7 @@ export default function ProductGallery({count, setCount}) {
             <span id="quantity">{count}</span>
            <button id="increase" onClick={increment}><img src={plus} alt="" /></button>
            </div>
-            <button id="add-to-cart">
+            <button className="add-to-cart" onClick={()=>handleAddToCart(count)}>
              <img src={cart} alt="Cart Icon" />
              Add to cart
             </button>
@@ -110,5 +150,6 @@ export default function ProductGallery({count, setCount}) {
          </div>
 
         </main>
+      </>  
     )
 }
